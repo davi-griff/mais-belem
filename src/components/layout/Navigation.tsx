@@ -7,10 +7,10 @@ interface NavigationProps {
 
 export function Navigation({ className }: NavigationProps) {
   const navItems = [
-    { href: "#reservations", icon: <Calendar size={20} />, label: "Reservas" },
-    { href: "#restaurants", icon: <Utensils size={20} />, label: "Restaurantes" },
-    { href: "#hotels", icon: <Hotel size={20} />, label: "Hotéis" },
-    { href: "#attractions", icon: <Landmark size={20} />, label: "Pontos Turísticos" },
+    { href: "/reservations", icon: <Calendar size={20} />, label: "Reservas" },
+    { href: "/restaurants", icon: <Utensils size={20} />, label: "Restaurantes" },
+    { href: "/hotels", icon: <Hotel size={20} />, label: "Hotéis" },
+    { href: "/attractions", icon: <Landmark size={20} />, label: "Pontos Turísticos" },
   ]
 
   return (

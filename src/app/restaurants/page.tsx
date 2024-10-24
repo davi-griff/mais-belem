@@ -23,6 +23,7 @@ import {
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Navigation } from '@/components/layout/Navigation'
+import { Header } from '@/components/layout/Header'
 
 // Leaflet icon setup (unchanged)
 delete L.Icon.Default.prototype._getIconUrl;
@@ -135,7 +136,7 @@ export default function RestaurantBookingPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="bg-[#5d0d6d] text-[#D3D3D5] p-4 fixed w-full z-50">
+      {/* <header className="bg-[#5d0d6d] text-[#D3D3D5] p-4 fixed w-full z-50">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center justify-between w-full md:w-auto">
             <h1 className="text-2xl font-bold">
@@ -169,7 +170,9 @@ export default function RestaurantBookingPage() {
             )}
           </div>
         </div>
-      </header>
+      </header> */}
+
+      <Header />
 
       <main className="flex-grow pt-24">
         <div className="max-w-7xl mx-auto px-4 py-8">

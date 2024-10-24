@@ -2,15 +2,21 @@
 
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useRouter } from 'next/navigation'
 
 interface UserActionsProps {
   isLoggedIn: boolean
-  handleLogin: () => void
   handleLogout: () => void
   className?: string
 }
 
-export function UserActions({ isLoggedIn, handleLogin, handleLogout, className }: UserActionsProps) {
+export function UserActions({ isLoggedIn, handleLogout, className }: UserActionsProps) {
+  const router = useRouter()
+
+  const handleLogin = () => {
+    router.push('/login')
+  }
+
   if (isLoggedIn) {
     return (
       <div className={`${className} flex items-center gap-4`}>
