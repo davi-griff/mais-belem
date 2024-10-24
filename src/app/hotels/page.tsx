@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Navigation } from '@/components/layout/Navigation'
+import { Switch } from "@/components/ui/switch"
 import { Header } from '@/components/layout/Header'
 
 // Leaflet icon setup (unchanged)
@@ -53,6 +53,8 @@ export default function HotelBookingPage() {
     email: '',
     phone: '',
   });
+  const [hotelType, setHotelType] = useState('all');
+  const [showOnlyGreenSeal, setShowOnlyGreenSeal] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -93,7 +95,9 @@ export default function HotelBookingPage() {
       image: "/placeholder.svg?height=200&width=300", 
       coordinates: [-1.4557, -48.4902],
       roomsLeft: 2,
-      greenSealReason: "It uses renewable energy sources, implements water conservation measures, and sources local, organic products for its restaurant."
+      greenSealReason: "It uses renewable energy sources, implements water conservation measures, and sources local, organic products for its restaurant.",
+      type: "hotel",
+      hasGreenSeal: true
     },
     { 
       id: 2, 
@@ -105,7 +109,9 @@ export default function HotelBookingPage() {
       image: "/placeholder.svg?height=200&width=300", 
       coordinates: [-1.4589, -48.5074],
       roomsLeft: 5,
-      greenSealReason: "The lodge uses solar power, has a comprehensive recycling program, and offers eco-tours to educate guests about local biodiversity."
+      greenSealReason: "The lodge uses solar power, has a comprehensive recycling program, and offers eco-tours to educate guests about local biodiversity.",
+      type: "adaptable",
+      hasGreenSeal: true
     },
     { 
       id: 3, 
@@ -117,7 +123,9 @@ export default function HotelBookingPage() {
       image: "/placeholder.svg?height=200&width=300", 
       coordinates: [-1.4522, -48.4827],
       roomsLeft: 3,
-      greenSealReason: "All suites are equipped with energy-efficient appliances, use rainwater harvesting systems, and the building features a green roof to reduce urban heat island effect."
+      greenSealReason: "All suites are equipped with energy-efficient appliances, use rainwater harvesting systems, and the building features a green roof to reduce urban heat island effect.",
+      type: "hotel",
+      hasGreenSeal: true
     },
     { 
       id: 4, 
@@ -129,8 +137,63 @@ export default function HotelBookingPage() {
       image: "/placeholder.svg?height=200&width=300", 
       coordinates: [-1.4468, -48.4789],
       roomsLeft: 1,
-      greenSealReason: "The guesthouse is built with sustainable materials, uses natural ventilation to reduce energy consumption, and has an organic garden that supplies the in-house kitchen."
+      greenSealReason: "The guesthouse is built with sustainable materials, uses natural ventilation to reduce energy consumption, and has an organic garden that supplies the in-house kitchen.",
+      type: "adaptable",
+      hasGreenSeal: true
     },
+    {
+      id: 5,
+      name: "Amazon River Cruise",
+      description: "Sustainable river cruise experience",
+      longDescription: "Explore the Amazon while staying on our eco-friendly river cruise ship.",
+      location: "Porto de Belém",
+      price: 300,
+      image: "/placeholder.svg?height=200&width=300",
+      coordinates: [-1.4380, -48.4908],
+      roomsLeft: 10,
+      greenSealReason: "The ship uses advanced water treatment systems, solar panels for energy, and supports local communities through sustainable tourism practices.",
+      type: "ship",
+      hasGreenSeal: true
+    },
+    {
+      id: 6,
+      name: "Hotel Tradicional Belém",
+      description: "Comfortable stay in the city center",
+      longDescription: "A traditional hotel offering comfortable rooms and convenient access to Belém's attractions.",
+      location: "Centro, Belém",
+      price: 120,
+      image: "/placeholder.svg?height=200&width=300",
+      coordinates: [-1.4550, -48.4880],
+      roomsLeft: 8,
+      type: "hotel",
+      hasGreenSeal: false
+    },
+    {
+      id: 7,
+      name: "Pousada Econômica",
+      description: "Budget-friendly guesthouse",
+      longDescription: "An affordable option for travelers looking for a simple and clean place to stay.",
+      location: "Campina, Belém",
+      price: 80,
+      image: "/placeholder.svg?height=200&width=300",
+      coordinates: [-1.4530, -48.4950],
+      roomsLeft: 15,
+      type: "adaptable",
+      hasGreenSeal: false
+    },
+    {
+      id: 8,
+      name: "Cruzeiro Amazônia Express",
+      description: "Short river cruise experience",
+      longDescription: "A quick and exciting river cruise option for those short on time but eager to explore the Amazon.",
+      location: "Porto de Belém",
+      price: 250,
+      image: "/placeholder.svg?height=200&width=300",
+      coordinates: [-1.4390, -48.4920],
+      roomsLeft: 20,
+      type: "ship",
+      hasGreenSeal: false
+    }
   ];
 
   const attractions = [
@@ -140,19 +203,39 @@ export default function HotelBookingPage() {
     { id: 4, name: "Mangal das Garças", coordinates: [-1.4669, -48.5055] },
   ];
 
+  const filteredHotels = hotels.filter((hotel) => {
+    return (hotelType === 'all' || hotel.type === hotelType) &&
+           (!showOnlyGreenSeal || hotel.hasGreenSeal);
+  });
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* <header className="bg-[#5d0d6d] text-[#D3D3D5] p-4 fixed w-full z-50">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center justify-between w-full md:w-auto">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-8">
             <h1 className="text-2xl font-bold">
               <span className="text-[#93b31f] text-3xl font-extrabold">+</span>Belém
             </h1>
-            <button className="md:hidden" onClick={toggleMenu}>
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            <nav className="hidden md:flex">
+              <ul className="flex gap-8">
+                <li>
+                  <a href="#" className="text-[#D3D3D5] hover:text-[#93b31f] transition-colors">
+                    Reservas
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-[#D3D3D5] hover:text-[#93b31f] transition-colors">
+                    Sobre
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-[#D3D3D5] hover:text-[#93b31f] transition-colors">
+                    Contato
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
-          <Navigation className={`${isMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row items-center w-full md:w-auto`} />
           <div className="hidden md:flex items-center gap-4">
             {isLoggedIn ? (
               <>
@@ -175,16 +258,19 @@ export default function HotelBookingPage() {
               </>
             )}
           </div>
+          <button className="md:hidden" onClick={toggleMenu}>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </header> */}
 
       <Header />
 
-      <main className="flex-grow pt-24"> {/* Increased padding-top */}
+      <main className="flex-grow pt-20">
         <div className="max-w-7xl mx-auto px-4 py-8">
           <h2 className="text-3xl font-bold text-[#5d0d6d] mb-8">Reserva de Hotéis Sustentáveis</h2>
           
-          <div className="mb-8 relative z-10"> {/* Added relative positioning and z-index */}
+          <div className="mb-8">
             <Card>
               <CardContent className="p-0">
                 <div className="h-[400px]">
@@ -223,6 +309,25 @@ export default function HotelBookingPage() {
               <Input type="date" placeholder="Check-in" className="w-40" />
               <Input type="date" placeholder="Check-out" className="w-40" />
               <Input type="number" placeholder="Hóspedes" className="w-32" />
+              <Select onValueChange={(value) => setHotelType(value)} defaultValue="all">
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Tipo de Acomodação" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Todos</SelectItem>
+                  <SelectItem value="hotel">Hotéis</SelectItem>
+                  <SelectItem value="ship">Navios</SelectItem>
+                  <SelectItem value="adaptable">Espaços Adaptáveis</SelectItem>
+                </SelectContent>
+              </Select>
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="green-seal"
+                  checked={showOnlyGreenSeal}
+                  onCheckedChange={setShowOnlyGreenSeal}
+                />
+                <Label htmlFor="green-seal">Apenas Selo Verde</Label>
+              </div>
               <Button className="bg-[#93b31f] text-[#5d0d6d]">
                 <Search className="mr-2 h-4 w-4" /> Buscar
               </Button>
@@ -230,7 +335,7 @@ export default function HotelBookingPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in">
-            {hotels.map((hotel) => (
+            {filteredHotels.map((hotel) => (
               <Card key={hotel.id} className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                 <CardHeader className="p-0">
                   <div className="relative h-48 overflow-hidden rounded-t-lg">
@@ -348,34 +453,38 @@ export default function HotelBookingPage() {
                   </div>
                   <p className="text-orange-500 font-semibold text-sm">Only {hotel.roomsLeft} rooms left</p>
                   <div className="mt-4">
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button variant="outline" className="w-full bg-green-100 text-green-800 hover:bg-green-200 flex items-center justify-center gap-2 transition-colors duration-300">
-                          <Leaf className="h-4 w-4" />
-                          Green Seal
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle className="text-2xl text-green-800">Green Seal Certification</DialogTitle>
-                          <DialogDescription className="text-base">
-                            Understanding sustainable practices
-                          </DialogDescription>
-                        </DialogHeader>
-                        <div className="mt-4">
-                          <p className="mb-4">
-                            The Green Seal is awarded to establishments that demonstrate exceptional commitment to environmental
-                            sustainability and eco-friendly practices. These places go above and beyond in their efforts to minimize their
-                            environmental impact and promote sustainable tourism.
-                          </p>
-                          <p className="font-semibold mb-2">{hotel.name} has earned this certification because:</p>
-                          <p className="text-green-700">{hotel.greenSealReason}</p>
-                        </div>
-                        <DialogClose asChild>
-                          <Button className="mt-4 bg-green-600 text-white hover:bg-green-700">Close</Button>
-                        </DialogClose>
-                      </DialogContent>
-                    </Dialog>
+                    {hotel.hasGreenSeal ? (
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button variant="outline" className="w-full bg-green-100 text-green-800 hover:bg-green-200 flex items-center justify-center gap-2 transition-colors duration-300">
+                            <Leaf className="h-4 w-4" />
+                            Green Seal
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle className="text-2xl text-green-800">Green Seal Certification</DialogTitle>
+                            <DialogDescription className="text-base">
+                              Understanding sustainable practices
+                            </DialogDescription>
+                          </DialogHeader>
+                          <div className="mt-4">
+                            <p className="mb-4">
+                              The Green Seal is awarded to establishments that demonstrate exceptional commitment to environmental
+                              sustainability and eco-friendly practices. These places go above and beyond in their efforts to minimize their
+                              environmental impact and promote sustainable tourism.
+                            </p>
+                            <p className="font-semibold mb-2">{hotel.name} has earned this certification because:</p>
+                            <p className="text-green-700">{hotel.greenSealReason}</p>
+                          </div>
+                          <DialogClose asChild>
+                            <Button className="mt-4 bg-green-600 text-white hover:bg-green-700">Close</Button>
+                          </DialogClose>
+                        </DialogContent>
+                      </Dialog>
+                    ) : (
+                      <p className="text-gray-500 italic">Standard Accommodation</p>
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -402,17 +511,6 @@ export default function HotelBookingPage() {
           }
         `}
       </style>
-      <style jsx global>{`
-        .leaflet-container {
-          z-index: 10;
-        }
-        .dialog-overlay {
-          z-index: 100;
-        }
-        .dialog-content {
-          z-index: 101;
-        }
-      `}</style>
     </div>
   )
 }
