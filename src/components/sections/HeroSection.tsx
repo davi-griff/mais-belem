@@ -12,26 +12,26 @@ export function HeroSection() {
           alt="Paisagem de Belém"
           fill
           priority
-          className="opacity-70"
+          className="opacity-70 object-cover"
         />
       </div>
       
-      <div className="relative z-10 text-center max-w-7xl mx-auto p-8 bg-black/50 rounded-2xl">
-        <h2 className="text-5xl font-bold mb-4 text-[#D3D3D5] text-shadow">
-          Hospedagens Sustentáveis para a COP-30 em Belém
+      <div className="relative z-10 text-center max-w-3xl mx-auto p-12 bg-black/60 rounded-3xl backdrop-blur-sm">
+        <h2 className="text-6xl font-extrabold mb-6 text-[#D3D3D5] text-shadow-lg tracking-tight">
+          <span className="text-[#93B31F]">+</span>Belém
         </h2>
-        <p className="text-2xl mb-8 text-[#D3D3D5] text-shadow">
-          Experimente acomodações ecológicas enquanto causa um impacto positivo
+        <p className="text-3xl mb-10 text-[#D3D3D5] text-shadow-md font-light leading-relaxed">
+          Hospedagens Sustentáveis para a COP-30
         </p>
         
-        <div className="max-w-md mx-auto flex bg-[#D3D3D5] rounded-full overflow-hidden shadow-lg">
+        <div className="max-w-md mx-auto flex bg-[#D3D3D5] rounded-full overflow-hidden shadow-2xl">
           <Input 
             type="text" 
             placeholder="Buscar hospedagens ecológicas..." 
-            className="flex-grow border-none px-6 py-3 text-[#5d0d6d]"
+            className="flex-grow border-none px-6 py-4 text-[#5d0d6d] text-lg"
           />
-          <Button className="rounded-r-full bg-[#5d0d6d] text-[#D3D3D5] px-6 py-3">
-            <Search className="w-5 h-5" />
+          <Button className="rounded-r-full bg-[#BD5DC1] text-[#D3D3D5] px-8 py-4 hover:bg-[#a34da7] transition-colors duration-300">
+            <Search className="w-6 h-6" />
           </Button>
         </div>
       </div>

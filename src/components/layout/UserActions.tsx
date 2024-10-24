@@ -11,36 +11,39 @@ interface UserActionsProps {
 }
 
 export function UserActions({ isLoggedIn, handleLogin, handleLogout, className }: UserActionsProps) {
+  if (isLoggedIn) {
+    return (
+      <div className={`${className} flex items-center gap-4`}>
+        <Avatar>
+          <AvatarImage src="/placeholder.svg?height=32&width=32" alt="@usuário" />
+          <AvatarFallback>U</AvatarFallback>
+        </Avatar>
+        <Button 
+          variant="default" 
+          onClick={handleLogout} 
+          className="bg-[#93B31F] text-[#5d0d6d] hover:bg-[#93B31F]/90 hover:text-[#D3D3D5]"
+        >
+          Sair
+        </Button>
+      </div>
+    )
+  }
+
   return (
-    <div className={`items-center gap-4 ${className}`}>
-      {isLoggedIn ? (
-        <>
-          <Avatar>
-            <AvatarImage src="/placeholder.svg?height=32&width=32" alt="@usuário" />
-            <AvatarFallback>U</AvatarFallback>
-          </Avatar>
-          <Button 
-            variant="outline" 
-            className="text-[#D3D3D5] border-[#D3D3D5]" 
-            onClick={handleLogout}
-          >
-            Sair
-          </Button>
-        </>
-      ) : (
-        <>
-          <Button 
-            variant="outline" 
-            className="text-[#D3D3D5] border-[#D3D3D5]" 
-            onClick={handleLogin}
-          >
-            Entrar
-          </Button>
-          <Button className="bg-[#93b31f] text-[#5d0d6d]">
-            Cadastrar
-          </Button>
-        </>
-      )}
+    <div className={`${className} flex items-center gap-4`}>
+      <Button 
+        variant="outline" 
+        onClick={handleLogin} 
+        className="text-[#D3D3D5] border-[#D3D3D5] hover:text-[#93B31F] hover:border-[#93B31F]"
+      >
+        Entrar
+      </Button>
+      <Button 
+        variant="default" 
+        className="bg-[#93B31F] text-[#F0F4F8] hover:bg-[#93B31F]/90 hover:text-white"
+      >
+        Cadastrar
+      </Button>
     </div>
   )
 }
