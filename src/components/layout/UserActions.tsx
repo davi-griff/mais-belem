@@ -4,6 +4,14 @@ import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useRouter } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 interface UserActionsProps {
   className?: string
@@ -33,18 +41,24 @@ export function UserActions({ className }: UserActionsProps) {
   if (session?.user) {
     return (
       <div className={`${className} flex items-center gap-4`}>
-        <Avatar>
-          <AvatarImage src="/placeholder.svg?height=32&width=32" alt={session.user.name || 'User'} />
-          <AvatarFallback>{session.user.name?.[0] || 'U'}</AvatarFallback>
-        </Avatar>
-        <span className="text-[#D3D3D5]">{session.user.name || session.user.email}</span>
-        <Button 
-          variant="default" 
-          onClick={handleLogout} 
-          className="bg-[#93B31F] text-[#5d0d6d] hover:bg-[#93B31F]/90 hover:text-[#D3D3D5]"
-        >
-          Sair
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Avatar>
+              <AvatarImage src="/placeholder.svg?height=32&width=32" alt={session.user.name || 'User'} />
+              <AvatarFallback>{session.user.name?.[0] || 'U'}</AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>{session.user.name || session.user.email}</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => router.push('/hotelmanag')}>
+              Gerenciar Hotéis
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>
+              Sair
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     )
   }

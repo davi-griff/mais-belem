@@ -84,7 +84,7 @@ export default function RestaurantBookingPage() {
       longDescription: "Experience the rich flavors of the Amazon rainforest with our sustainable and locally-sourced menu.",
       location: "Centro, Belém", 
       priceRange: "$$", 
-      image: "/placeholder.svg?height=200&width=300", 
+      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
       coordinates: [-1.4557, -48.4902],
       availableTables: 5,
       greenSealReason: "Uses only locally-sourced ingredients, implements a zero-waste policy, and supports local indigenous communities."
@@ -96,7 +96,7 @@ export default function RestaurantBookingPage() {
       longDescription: "A perfect blend of international cuisine with Amazonian ingredients, all prepared with sustainability in mind.",
       location: "Cidade Velha, Belém", 
       priceRange: "$$$", 
-      image: "/placeholder.svg?height=200&width=300", 
+      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
       coordinates: [-1.4589, -48.5074],
       availableTables: 3,
       greenSealReason: "Operates on 100% renewable energy, uses biodegradable packaging, and has an on-site organic garden."
@@ -108,7 +108,7 @@ export default function RestaurantBookingPage() {
       longDescription: "Enjoy breathtaking views of the Amazon River while savoring our sustainable seafood and plant-based dishes.",
       location: "Nazaré, Belém", 
       priceRange: "$$$$", 
-      image: "/placeholder.svg?height=200&width=300", 
+      image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
       coordinates: [-1.4522, -48.4827],
       availableTables: 2,
       greenSealReason: "Practices responsible fishing, uses energy-efficient appliances, and actively participates in local river clean-up initiatives."
@@ -120,7 +120,7 @@ export default function RestaurantBookingPage() {
       longDescription: "A cozy café offering a variety of açaí bowls, Amazonian fruits, and organic coffee in an eco-friendly setting.",
       location: "Umarizal, Belém", 
       priceRange: "$", 
-      image: "/placeholder.svg?height=200&width=300", 
+      image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
       coordinates: [-1.4468, -48.4789],
       availableTables: 8,
       greenSealReason: "Sources açaí and other fruits from sustainable local farms, uses compostable utensils, and runs educational programs on Amazonian ecology."
